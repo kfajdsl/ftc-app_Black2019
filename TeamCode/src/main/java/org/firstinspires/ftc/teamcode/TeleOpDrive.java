@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @TeleOp(name = "Tel", group = "Sensor")
 public class TeleOpDrive extends LinearOpMode{
 
-    HardwarePushBot robot = new HardwarePushBot();
+    HardwareBot robot = new HardwareBot();
 
 
     @Override
@@ -29,33 +29,36 @@ public class TeleOpDrive extends LinearOpMode{
             // Drive constants
             final double FORWARD_THRES = 0.3;
             final double REVERSE_THRES = -0.3;
-            final double driveSens = 0.7;
-            final double turnSens = 0.5;
+            final double DRIVE_SENS = 0.7;
+            final double TURN_SENS = 0.5;
 
             // Drive variables
-            double rightPower = gamepad1.right_trigger * 0.8;
-            double leftPower = gamepad1.left_trigger * 0.8;
+            double rightPower = gamepad1.right_stick_y * 0.8 * DRIVE_SENS;
+            double leftPower = gamepad1.left_stick_y * 0.8 * TURN_SENS;
 
 
             // Send calculated power to wheels
             // Drive system
+
+
             if (rightPower < FORWARD_THRES && rightPower > REVERSE_THRES && leftPower < FORWARD_THRES && leftPower > REVERSE_THRES) {
                 DriveMethods.stopRightMotors();
                 DriveMethods.stopLeftMotors();
             } else if (rightPower != 0.0 && leftPower != 0.0) {
-                DriveMethods.driveRight(rightPower * driveSens);
-                DriveMethods.driveLeft(leftPower * driveSens);
+                DriveMethods.driveRight(rightPower * DRIVE_SENS);
+                DriveMethods.driveLeft(leftPower * DRIVE_SENS);
             } else if (rightPower != 0.0 && leftPower == 0.0) {
-                DriveMethods.driveRight(rightPower * driveSens);
+                DriveMethods.driveRight(rightPower * DRIVE_SENS);
             } else if (leftPower != 0.0 && rightPower == 0.0) {
-                DriveMethods.driveLeft(leftPower * driveSens);
+                DriveMethods.driveLeft(leftPower * DRIVE_SENS);
             } else if (rightPower < REVERSE_THRES && leftPower > FORWARD_THRES) {
-                DriveMethods.driveLeft(leftPower * turnSens);
-                DriveMethods.driveRight(rightPower * turnSens);
+                DriveMethods.driveLeft(leftPower * TURN_SENS);
+                DriveMethods.driveRight(rightPower * TURN_SENS);
             } else if (rightPower > FORWARD_THRES && leftPower < REVERSE_THRES) {
-                DriveMethods.driveLeft(leftPower * turnSens);
-                DriveMethods.driveRight(rightPower * turnSens);
+                DriveMethods.driveLeft(leftPower * TURN_SENS);
+                DriveMethods.driveRight(rightPower * TURN_SENS);
             }
+
 
         }
 
