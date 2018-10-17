@@ -5,7 +5,7 @@ package org.firstinspires.ftc.teamcode;
  * Created by shrey on 2017-11-05.
  */
 
-public class DriveMethods extends HardwarePushBot{
+public class DriveMethods extends Hardware {
 
         public static void driveRight(double speed){
             rightDrive.setPower(speed);

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @TeleOp(name = "Tel", group = "Sensor")
 public class TeleOpDrive extends LinearOpMode{
 
-    HardwareBot robot = new HardwareBot();
+    Hardware robot = new Hardware();
 
 
     @Override
