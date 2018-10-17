@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by shrey on 2018-09-12.
  * Modified by Sahan Reddy on 2018-10-16
  */
-public class HardwarePushBot {
+public class HardwareBot {
     /* Public OpMode members. */
     public static DcMotor leftDrive  = null;
     public static DcMotor rightDrive = null;
@@ -26,7 +26,7 @@ public class HardwarePushBot {
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public HardwarePushBot(){
+    public HardwareBot(){
 
     }
 

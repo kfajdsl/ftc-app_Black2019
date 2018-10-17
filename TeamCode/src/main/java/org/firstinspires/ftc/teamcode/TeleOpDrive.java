@@ -40,7 +40,19 @@ public class TeleOpDrive extends LinearOpMode{
             // Send calculated power to wheels
             // Drive system
 
+            if (rightPower < FORWARD_THRES && rightPower > REVERSE_THRES) {
+                DriveMethods.stopRightMotors();
+            } else {
+                DriveMethods.driveRight(rightPower);
+            }
+            
+            if (leftPower < FORWARD_THRES && leftPower > REVERSE_THRES) {
+                DriveMethods.stopLeftMotors();
+            } else {
+                DriveMethods.driveLeft(leftPower);
+            }
 
+            /*
             if (rightPower < FORWARD_THRES && rightPower > REVERSE_THRES && leftPower < FORWARD_THRES && leftPower > REVERSE_THRES) {
                 DriveMethods.stopRightMotors();
                 DriveMethods.stopLeftMotors();
@@ -58,6 +70,7 @@ public class TeleOpDrive extends LinearOpMode{
                 DriveMethods.driveLeft(leftPower * TURN_SENS);
                 DriveMethods.driveRight(rightPower * TURN_SENS);
             }
+            */
 
 
         }
