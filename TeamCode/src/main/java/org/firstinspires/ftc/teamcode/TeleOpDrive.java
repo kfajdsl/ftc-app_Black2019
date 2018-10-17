@@ -33,8 +33,8 @@ public class TeleOpDrive extends LinearOpMode{
             final double TURN_SENS = 0.5;
 
             // Drive variables
-            double rightPower = gamepad1.right_stick_y * 0.8 * DRIVE_SENS;
-            double leftPower = gamepad1.left_stick_y * 0.8 * TURN_SENS;
+            double rightPower = gamepad1.right_stick_y * 0.8;
+            double leftPower = gamepad1.left_stick_y * 0.8;
 
 
             // Send calculated power to wheels
