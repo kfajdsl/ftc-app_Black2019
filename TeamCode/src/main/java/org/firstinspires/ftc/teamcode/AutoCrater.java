@@ -7,8 +7,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class AutoCrater extends LinearOpMode {
     Hardware robot = new Hardware();
 
+
     @Override
     public void runOpMode() throws InterruptedException {
+        /* Commented out so it actually compiles so we can calibrate turn
         robot.init(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
@@ -94,7 +96,7 @@ public class AutoCrater extends LinearOpMode {
         DriveMethods.driveDist();
         telemetry.addData("Parked", "Parked in crater");
         telemetry.addData("Status", "Finished");
-
+        */
     }
 
 
