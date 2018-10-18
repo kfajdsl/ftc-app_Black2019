@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 /**
  * Created by shrey on 2017-11-05.
  * Modified by Sahan Reddy on 2018-10-16
@@ -9,10 +11,12 @@ package org.firstinspires.ftc.teamcode;
 public class DriveMethods extends Hardware {
 
         public static void driveRight(double speed){
+            rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightDrive.setPower(speed);
         }
 
         public static void driveLeft(double speed){
+            leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             leftDrive.setPower(speed);
         }
 
@@ -21,10 +25,47 @@ public class DriveMethods extends Hardware {
      * the two thresholds. It's important to do this so the robot will stop, safely
      */
         public static void stopRightMotors() { //always zero
+            rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightDrive.setPower(0);
         }
 
         public static void stopLeftMotors(){
+            rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             leftDrive.setPower(0);
         }
+
+        //FIXME fill in wheel circumference here
+        static final double WHEEL_CIRCUM = 0;
+        static final int TICKS_PER_INCH = (int) (1440 / WHEEL_CIRCUM);
+
+
+        public static void driveDist(double inches) {
+            rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            rightDrive.setTargetPosition((int) (inches * TICKS_PER_INCH));
+            leftDrive.setTargetPosition((int) (inches * TICKS_PER_INCH));
+
+            rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+
+        //FIXME calibrate this (calculate ticks / degree). add degrees parameter.
+        public static void turn() {
+            rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            rightDrive.setTargetPosition(-960);
+            leftDrive.setTargetPosition(960);
+
+            //measure how much the robot turns with that, and calculate ticks per degree.
+            //Ex. 2.3 ticks per degree
+            // int tickGoal = (int) 2.3 * degree;
+            //rightDrive.setTargetPosition(-1 * tickGoal);
+            //leftDrive.setTargetPosition(tickGoal);
+
+            rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+
 }
