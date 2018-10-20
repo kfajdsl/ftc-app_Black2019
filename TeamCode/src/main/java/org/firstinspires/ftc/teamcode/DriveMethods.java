@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by shrey on 2017-11-05.
  * Modified by Sahan Reddy on 2018-10-16
@@ -37,6 +39,22 @@ public class DriveMethods extends Hardware {
         //FIXME fill in wheel circumference here
         static final double WHEEL_CIRCUM = 0;
         static final int TICKS_PER_INCH = (int) (1440 / WHEEL_CIRCUM);
+
+        public static void timeTurnRight(int seconds) throws InterruptedException {
+            driveRight(-1);
+            driveLeft(1);
+            sleep(seconds * 1000);
+            stopRightMotors();
+            stopLeftMotors();
+        }
+
+        public static void timeTurnLeft(int seconds) throws InterruptedException {
+            driveRight(1);
+            driveLeft(-1);
+            sleep(seconds * 1000);
+            stopRightMotors();
+            stopLeftMotors();
+        }
 
 
         public static void driveDist(double inches) {

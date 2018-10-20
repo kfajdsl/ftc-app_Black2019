@@ -10,7 +10,7 @@ public class AutoCrater extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        /* Commented out so it actually compiles so we can calibrate turn
+        /*// Commented out so it actually compiles so we can calibrate turn
         robot.init(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
@@ -96,7 +96,7 @@ public class AutoCrater extends LinearOpMode {
         DriveMethods.driveDist();
         telemetry.addData("Parked", "Parked in crater");
         telemetry.addData("Status", "Finished");
-        */
+*/
     }
 
 
