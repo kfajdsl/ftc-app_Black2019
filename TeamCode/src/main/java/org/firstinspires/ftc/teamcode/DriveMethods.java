@@ -37,8 +37,7 @@ public class DriveMethods extends Hardware {
             leftDrive.setPower(0);
         }
 
-        //FIXME fill in wheel circumference here
-        static final double WHEEL_CIRCUM = 0;
+        static final double WHEEL_CIRCUM = 2.165;
         static final int TICKS_PER_INCH = (int) (1440 / WHEEL_CIRCUM);
 
         public static void timeTurnRight(int seconds) throws InterruptedException {
