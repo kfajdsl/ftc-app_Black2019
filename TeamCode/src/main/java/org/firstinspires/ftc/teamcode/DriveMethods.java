@@ -20,6 +20,7 @@ public class DriveMethods extends Hardware {
      * This method is used to stop the drive motors in order for the robot to stop when in between
      * the two thresholds. It's important to do this so the robot will stop, safely
      */
+
         public static void stopRightMotors() { //always zero
             rightDrive.setPower(0);
         }
