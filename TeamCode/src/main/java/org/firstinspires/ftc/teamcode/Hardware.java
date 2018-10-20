@@ -59,9 +59,9 @@ public class Hardware {
         arm.setPower(0);
         lift.setPower(0);
 
-        // Set drive motors to run with encoders.
-        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // Set drive motors' encoders to 0 at starting position.
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Set arm motors to reset encoder to zero at current position
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

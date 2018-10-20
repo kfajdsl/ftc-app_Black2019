@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@TeleOp(name = "Tel", group = "Sensor")
+@TeleOp(name = "TeleOp", group = "HopeBot")
 public class TeleOpDrive extends LinearOpMode{
 
     Hardware robot = new Hardware();
