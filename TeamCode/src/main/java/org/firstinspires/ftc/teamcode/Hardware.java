@@ -20,7 +20,7 @@ public class Hardware {
     public static DcMotor lift = null;
 
     public static CRServo intakeRight = null;
-    public static CRServo intakeLeft = null;
+    //public static CRServo intakeLeft = null;
 
     public static ColorSensor colorSensor = null;
     //public static ColorSensor colorSense    = null;
@@ -69,12 +69,12 @@ public class Hardware {
 
         // Define and Initialize Servo(s)
         intakeRight = hwMap.get(CRServo.class, "intake_right");
-        intakeLeft  = hwMap.get(CRServo.class, "intake_left");
+        //intakeLeft  = hwMap.get(CRServo.class, "intake_left");
 
         intakeRight.setDirection(CRServo.Direction.REVERSE);
-        intakeLeft.setDirection(CRServo.Direction.FORWARD);
+        //intakeLeft.setDirection(CRServo.Direction.FORWARD);
         intakeRight.setPower(0);
-        intakeLeft.setPower(0);
+        //intakeLeft.setPower(0);
 
         colorSensor = hwMap.get(ColorSensor.class, "color_sensor");
 
