@@ -87,7 +87,8 @@ public class TeleOpDrive extends LinearOpMode{
             //lowerLiftBut = gamepad1.b;
 
             //  Manual control
-            if ((liftUp && liftDown) || (!liftUp && !liftDown)) {
+            // (liftUp && liftDown) || (!liftUp && !liftDown) //old boolean for debugging
+            if (!liftUp && !liftDown) {
                 LiftMethods.liftPower(0);
             } else if (liftUp) {
                 LiftMethods.liftPower(0.25);
@@ -114,7 +115,8 @@ public class TeleOpDrive extends LinearOpMode{
             //lowerArmBut = gamepad1.y;
 
             //  Manual control
-            if ((armUp && armDown) || (!armUp && armDown)) {
+            // (armUp && armDown) || (!armUp && armDown) //old boolean for debugging
+            if (!armDown && !armUp) {
                 ArmMethods.armPower(0);
             } else if (armUp) {
                 ArmMethods.armPower(0.25);
@@ -137,13 +139,13 @@ public class TeleOpDrive extends LinearOpMode{
             autoLiftRaiseArm = gamepad1.left_bumper;
             autoLiftLowerArm = gamepad1.left_trigger > TRIGGER_THRES;
             if (!liftUp && !liftDown && !armUp && !armDown && !autoLiftLowerArm &&
-                    autoLiftRaiseArm) { //make sure no other arm or lift buttons are being pressed
+                autoLiftRaiseArm) { //make sure no other arm or lift buttons are being pressed
                 LiftMethods.raiseLift();
                 ArmMethods.raiseArm();
             }
 
             if (!liftUp && !liftDown && !armUp && !armDown && !autoLiftRaiseArm &&
-                    autoLiftLowerArm) { //make sure no other arm or lift buttons are being pressed
+                autoLiftLowerArm) { //make sure no other arm or lift buttons are being pressed
                 ArmMethods.lowerArm();
                 LiftMethods.lowerLift();
             }

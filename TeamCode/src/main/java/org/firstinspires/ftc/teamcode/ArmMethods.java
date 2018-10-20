@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class ArmMethods extends Hardware {
-    static final int TICK_GOAL = 405 * 4; //180 is distance to move arm in degrees. * 4 because Tetrix motors have 1440 ticks.
+
+    static final int TICK_GOAL = 405 * 4; //180 is distance to move motor gear in degrees.
+                                          // * 4 because Tetrix motors have 1440 ticks.
 
     public static void raiseArm() {
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
