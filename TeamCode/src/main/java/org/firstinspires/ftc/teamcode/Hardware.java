@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * Modified by Sahan Reddy on 2018-11-02
 */
 public class Hardware {
-    /* Public OpMode members. */
+
     public static DcMotor leftBackDrive;
     public static DcMotor leftMidDrive;
     public static DcMotor rightBackDrive;
@@ -21,15 +21,12 @@ public class Hardware {
 
     HardwareMap hwMap;
 
-    /* Constructor */
     public Hardware(HardwareMap hwmap){
         this.hwMap = hwMap;
     }
 
-    /* Initialize standard Hardware interfaces */
     public void init() {
 
-        // Define and Initialize Motors
         leftBackDrive = hwMap.get(DcMotor.class, "left_back_drive");
         leftMidDrive = hwMap.get(DcMotor.class, "left_mid_drive");
         rightBackDrive = hwMap.get(DcMotor.class, "right_back_drive");
@@ -69,7 +66,6 @@ public class Hardware {
         arm.setPower(0);
         lift.setPower(0);
         intake.setPower(0);
-
 
     }
 }

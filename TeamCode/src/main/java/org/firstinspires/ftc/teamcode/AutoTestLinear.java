@@ -15,7 +15,9 @@ public class AutoTestLinear extends LinearOpMode
 
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry.addData("Status", "DogeCV 2018.0 - Sampling Order Example");
+
+        Hardware robot = new Hardware(hardwareMap);
+        robot.init();
 
         detector = new SamplingOrderDetector();
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
