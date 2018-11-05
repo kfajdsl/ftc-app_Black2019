@@ -1,3 +1,7 @@
+/**
+* Created by Sahan Reddy on 2018-11-4
+*/
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -48,7 +52,7 @@ public class TestingOp extends OpMode {
         boolean intake = gamepad1.right_bumper;
         boolean intakeRev = gamepad1.left_bumper;
 
-        if(intake && !intakeRev) {
+        if (intake && !intakeRev) {
             Hardware.intake.setPower(1);
         }
         if (intakeRev && !intake) {

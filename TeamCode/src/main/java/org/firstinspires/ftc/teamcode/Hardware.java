@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 /**
  * Created by shrey on 2018-09-12.
  * Modified by Sahan Reddy on 2018-11-02
- */
+*/
 public class Hardware {
     /* Public OpMode members. */
     public static DcMotor leftBackDrive;
