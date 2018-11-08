@@ -2,16 +2,16 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.DogeCV;
+import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @Autonomous(name="Autonomous Test")
 
-public class AutoTestLinear extends LinearOpMode
+public class AutoTestTiming extends LinearOpMode
 {
-    private SamplingOrderDetector detector;
+    private SamplingOrderDetectorBasic detector;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -19,7 +19,7 @@ public class AutoTestLinear extends LinearOpMode
         Hardware robot = new Hardware(hardwareMap);
         robot.init();
 
-        detector = new SamplingOrderDetector();
+        detector = new SamplingOrderDetectorBasic();
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         detector.useDefaults();
 
@@ -36,12 +36,14 @@ public class AutoTestLinear extends LinearOpMode
         detector.enable();
 
         while(!isStarted()) {
-            telemetry.addData("Current Order" , detector.getCurrentOrder().toString());
+            telemetry.addData("Current Order" , detector.getPosition().name());
         }
 
-        telemetry.addData("Last Order" , detector.getLastOrder().toString());
+        detector.disable();
 
-        switch(detector.getLastOrder()) {
+        telemetry.addData("Final Order Choice" , detector.getLastPosition().name());
+
+        switch(detector.getLastPosition()) {
             case LEFT:
                 DriveMethods.driveLeft(-1);
                 DriveMethods.driveRight(1);
@@ -56,7 +58,7 @@ public class AutoTestLinear extends LinearOpMode
                 DriveMethods.driveLeft(0);
                 DriveMethods.driveRight(0);
                 break;
-            case CENTER:
+            case MIDDLE:
                 DriveMethods.driveLeft(1);
                 DriveMethods.driveRight(1);
                 Thread.sleep(500);
@@ -65,7 +67,5 @@ public class AutoTestLinear extends LinearOpMode
                 break;
         }
 
-        detector.disable();
     }
-
 }
