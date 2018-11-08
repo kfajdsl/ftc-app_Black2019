@@ -12,19 +12,20 @@ public  class DriveMethods {
     final static double DEGREES_PER_TICK = 10; //FIXME replace with actual degree/tick number
 
     public static void driveLeft(double speed) {
-        Hardware.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Hardware.leftMidDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //Hardware.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //Hardware.leftMidDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Hardware.leftBackDrive.setPower(speed);
-        Hardware.leftMidDrive.setPower(speed);
+        Hardware.leftMidDrive.setPower(speed * 0.5);
     }
 
     public static void driveRight(double speed) {
-        Hardware.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Hardware.rightMidDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //Hardware.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //Hardware.rightMidDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Hardware.rightBackDrive.setPower(speed);
-        Hardware.rightMidDrive.setPower(speed);
+        Hardware.rightMidDrive.setPower(speed * 0.5);
     }
 
+    /*
     public static void driveDist(double inches) throws InterruptedException {
         int target = (int) (inches * TICKS_PER_INCH);
 
@@ -105,4 +106,5 @@ public  class DriveMethods {
             Thread.sleep(10);
         }
     }
+    */
 }

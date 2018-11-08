@@ -50,10 +50,10 @@ public class Hardware {
         intake.setDirection(CRServo.Direction.REVERSE);
 
 
-        leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftMidDrive. setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMidDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftMidDrive. setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMidDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
