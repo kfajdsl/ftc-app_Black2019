@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.DogeCV;
-import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
-import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -11,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 public class AutoTestTiming extends LinearOpMode
 {
-    private SamplingOrderDetectorBasic detector;
+    private GoldPositionDetector detector;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -19,7 +17,7 @@ public class AutoTestTiming extends LinearOpMode
         Hardware robot = new Hardware(hardwareMap);
         robot.init();
 
-        detector = new SamplingOrderDetectorBasic();
+        detector = new GoldPositionDetector();
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         detector.useDefaults();
 

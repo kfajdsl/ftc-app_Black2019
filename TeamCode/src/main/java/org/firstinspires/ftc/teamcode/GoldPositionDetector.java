@@ -24,7 +24,7 @@ import java.util.List;
  * Modified by Sahan Reddy on 11/8/2018
  */
 
-public class SamplingOrderDetectorBasic extends DogeCVDetector {
+public class GoldPositionDetector extends DogeCVDetector {
 
     public enum GoldPosition {
         LEFT,
@@ -63,7 +63,7 @@ public class SamplingOrderDetectorBasic extends DogeCVDetector {
     /**
      * Simple constructor
      */
-    public SamplingOrderDetectorBasic() {
+    public GoldPositionDetector() {
         super();
         detectorName = "Gold Align Detector"; // Set the detector name
     }
