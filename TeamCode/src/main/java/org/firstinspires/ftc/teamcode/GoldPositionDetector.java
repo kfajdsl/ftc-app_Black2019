@@ -42,6 +42,7 @@ public class GoldPositionDetector extends DogeCVDetector {
     // Results of the detector
     private boolean found    = false; // Is the gold mineral found
     private double  goldXPos = 0;     // X Position (in pixels) of the gold element
+    private double  goldYPos = 0;     // Y Position (in pixels) of the gold element
     private GoldPosition curGoldPos = GoldPosition.NOT_FOUND;
     private GoldPosition lastGoldPos = curGoldPos;
 
@@ -111,7 +112,10 @@ public class GoldPositionDetector extends DogeCVDetector {
         double leftX     = (getAdjustedSize().width / 3);
         double rightX    = (getAdjustedSize().width / 1.5);
 
+
         double xPos; // Current Gold X Pos
+        double yPos; // Current Gold Y Pos
+
 
         if(bestRect != null){
             // Show chosen result
@@ -122,20 +126,25 @@ public class GoldPositionDetector extends DogeCVDetector {
             xPos = bestRect.x + (bestRect.width / 2);
             goldXPos = xPos;
 
+            // Set Y pos
+            yPos = bestRect.y + (bestRect.height / 2);
+            goldYPos = yPos;
             // Draw center point
             Imgproc.circle(displayMat, new Point( xPos, bestRect.y + (bestRect.height / 2)), 5, new Scalar(0,255,0),2);
 
-            // Check if the mineral is aligned
-            if(xPos < leftX) {
-                curGoldPos = GoldPosition.LEFT;
-            } else if (xPos > rightX) {
-                curGoldPos = GoldPosition.RIGHT;
-            } else {
-                curGoldPos = GoldPosition.MIDDLE;
+            // Make sure mineral is on ground and not some dude's shirt
+            if (yPos < getAdjustedSize().height / 2) {
+                // Check mineral position
+                if (xPos < leftX) {
+                    curGoldPos = GoldPosition.LEFT;
+                } else if (xPos > rightX) {
+                    curGoldPos = GoldPosition.RIGHT;
+                } else {
+                    curGoldPos = GoldPosition.MIDDLE;
+                }
             }
 
             lastGoldPos = curGoldPos;
-
 
             // Draw Current X
             Imgproc.putText(displayMat,"Current X: " + bestRect.x,new Point(10,getAdjustedSize().height - 10),0,0.5, new Scalar(255,255,255),1);
@@ -149,6 +158,7 @@ public class GoldPositionDetector extends DogeCVDetector {
             //Draw debug alignment info
             if(isFound()){
                 Imgproc.line(displayMat,new Point(goldXPos, getAdjustedSize().height), new Point(goldXPos, getAdjustedSize().height - 30),new Scalar(255,255,0), 2);
+                Imgproc.line(displayMat,new Point(getAdjustedSize().width, goldYPos), new Point(getAdjustedSize().width - 30, goldYPos), new Scalar(255,255,0), 2);
             }
 
             Imgproc.line(displayMat,new Point(leftX, getAdjustedSize().height), new Point(leftX, getAdjustedSize().height - 40), new Scalar(255,0,0));
