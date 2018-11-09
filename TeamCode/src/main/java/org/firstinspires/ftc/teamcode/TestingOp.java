@@ -16,13 +16,18 @@ public class TestingOp extends OpMode {
 
     @Override
     public void loop() {
+        final double STICK_THRESH = 0.3;
+        final double TIGGER_THRESH = 0.1;
+
         double leftDrive = gamepad1.left_stick_y;
         double rightDrive = gamepad1.right_stick_y;
 
-        Hardware.leftBackDrive.setPower(leftDrive);
-        Hardware.leftMidDrive.setPower(leftDrive);
-        Hardware.rightBackDrive.setPower(rightDrive);
-        Hardware.rightMidDrive.setPower(rightDrive);
+        if (leftDrive > STICK_THRESH || leftDrive < -STICK_THRESH) {
+            DriveMethods.driveLeft(leftDrive);
+        }
+        if (rightDrive > STICK_THRESH || rightDrive < -STICK_THRESH) {
+            DriveMethods.driveRight(rightDrive);
+        }
 
         boolean armUp = gamepad1.dpad_up;
         boolean armDown = gamepad1.dpad_down;
@@ -61,6 +66,8 @@ public class TestingOp extends OpMode {
         if (!intake && !intakeRev) {
             Hardware.intake.setPower(0);
         }
+
+        boolean toggleLift =
 
     }
 }

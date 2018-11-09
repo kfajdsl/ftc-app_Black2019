@@ -47,26 +47,23 @@ public class GoldPositionDetector extends DogeCVDetector {
     private GoldPosition lastGoldPos = curGoldPos;
 
     // Detector settings
-    public boolean debugAlignment = true; // Show debug lines to show alignment settings
+    boolean debugAlignment = true; // Show debug lines to show alignment settings
+    DogeCV.AreaScoringMethod areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Setting to decide to use MaxAreaScorer or PerfectAreaScorer
 
-    public DogeCV.AreaScoringMethod areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Setting to decide to use MaxAreaScorer or PerfectAreaScorer
-
+    // Default vars to calculate position of gold.
+    double leftX   = (getAdjustedSize().width / 3);
+    double rightX  = (getAdjustedSize().width / 1.5);
+    double threshY = (getAdjustedSize().height / 2);
 
     //Create the default filters and scorers
-    public DogeCVColorFilter yellowFilter      = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW); //Default Yellow filter
+    DogeCVColorFilter yellowFilter      = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW); //Default Yellow filter
+    RatioScorer       ratioScorer       = new RatioScorer(1.0, 3);          // Used to find perfect squares
+    MaxAreaScorer     maxAreaScorer     = new MaxAreaScorer( 0.01);                    // Used to find largest objects
+    PerfectAreaScorer perfectAreaScorer = new PerfectAreaScorer(5000,0.05); // Used to find objects near a tuned area value
 
-    public RatioScorer       ratioScorer       = new RatioScorer(1.0, 3);          // Used to find perfect squares
-    public MaxAreaScorer     maxAreaScorer     = new MaxAreaScorer( 0.01);                    // Used to find largest objects
-    public PerfectAreaScorer perfectAreaScorer = new PerfectAreaScorer(5000,0.05); // Used to find objects near a tuned area value
-
-
-
-    /**
-     * Simple constructor
-     */
-    public GoldPositionDetector() {
+    GoldPositionDetector(String detectorName) {
         super();
-        detectorName = "Gold Align Detector"; // Set the detector name
+        this.detectorName = detectorName;
     }
 
 
@@ -108,9 +105,6 @@ public class GoldPositionDetector extends DogeCVDetector {
             }
         }
 
-        // Vars to calculate the alignment logic.
-        double leftX     = (getAdjustedSize().width / 3);
-        double rightX    = (getAdjustedSize().width / 1.5);
 
 
         double xPos; // Current Gold X Pos
@@ -133,7 +127,7 @@ public class GoldPositionDetector extends DogeCVDetector {
             Imgproc.circle(displayMat, new Point( xPos, bestRect.y + (bestRect.height / 2)), 5, new Scalar(0,255,0),2);
 
             // Make sure mineral is on ground and not some dude's shirt
-            if (yPos < getAdjustedSize().height / 2) {
+            if (yPos < threshY) {
                 // Check mineral position
                 if (xPos < leftX) {
                     curGoldPos = GoldPosition.LEFT;
@@ -192,19 +186,20 @@ public class GoldPositionDetector extends DogeCVDetector {
      * Returns gold element position (LEFT, MIDDLE, RIGHT, or NOT_FOUND)
      * @return gold element position as an enum value.
      */
-    public GoldPosition getPosition(){
+    GoldPosition getPosition(){
         return curGoldPos;
     }
 
-    public GoldPosition getLastPosition() {
+    GoldPosition getLastPosition() {
         return lastGoldPos;
     }
+
 
     /**
      * Returns gold element last x-position
      * @return last x-position in screen pixels of gold element
      */
-    public double getXPosition(){
+    double getXPosition(){
         return goldXPos;
     }
 
@@ -212,7 +207,8 @@ public class GoldPositionDetector extends DogeCVDetector {
      * Returns if a gold mineral is being tracked/detected
      * @return if a gold mineral is being tracked/detected
      */
-    public boolean isFound() {
+    boolean isFound() {
         return found;
     }
+
 }

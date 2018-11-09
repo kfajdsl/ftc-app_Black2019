@@ -6,8 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="Autonomous Test")
-
-public class AutoTestTiming extends LinearOpMode
+public class AutoDepot extends LinearOpMode
 {
     private GoldPositionDetector detector;
 
@@ -17,7 +16,7 @@ public class AutoTestTiming extends LinearOpMode
         Hardware robot = new Hardware(hardwareMap);
         robot.init();
 
-        detector = new GoldPositionDetector();
+        detector = new GoldPositionDetector("Test Detector");
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         detector.useDefaults();
 
@@ -31,6 +30,11 @@ public class AutoTestTiming extends LinearOpMode
         detector.ratioScorer.weight = 15;
         detector.ratioScorer.perfectRatio = 1.0;
 
+        //FIXME make these appropriate to mounting position
+        detector.leftX   = (detector.getAdjustedSize().width / 3);
+        detector.rightX  = (detector.getAdjustedSize().width / 1.5);
+        detector.threshY = (detector.getAdjustedSize().height / 2);
+
         detector.enable();
 
         while(!isStarted()) {
@@ -41,29 +45,43 @@ public class AutoTestTiming extends LinearOpMode
 
         telemetry.addData("Final Order Choice" , detector.getLastPosition().name());
 
+        ArmMethods.deHook();
+
+        //FIXME add proper timings
         switch(detector.getLastPosition()) {
             case LEFT:
-                DriveMethods.driveLeft(-1);
-                DriveMethods.driveRight(1);
+                DriveMethods.turnLeft(1); //turn to mineral
                 Thread.sleep(500);
-                DriveMethods.driveLeft(0);
-                DriveMethods.driveRight(0);
+
+                DriveMethods.drive(1); //drive to mineral and a little bit more
+                Thread.sleep(500);
+
+                DriveMethods.turn
+
                 break;
             case RIGHT:
-                DriveMethods.driveLeft(1);
-                DriveMethods.driveRight(-1);
+                DriveMethods.turnRight(1); //turn to mineral
                 Thread.sleep(500);
-                DriveMethods.driveLeft(0);
-                DriveMethods.driveRight(0);
+
+                DriveMethods.drive(1); //drive to mineral
+                Thread.sleep(500);
+
                 break;
             case MIDDLE:
-                DriveMethods.driveLeft(1);
-                DriveMethods.driveRight(1);
+                DriveMethods.drive(1); //drive to mineral
                 Thread.sleep(500);
-                DriveMethods.driveLeft(0);
-                DriveMethods.driveRight(0);
+
                 break;
         }
 
+        ArmMethods.raiseLift(); //lift lift
+        ArmMethods.raiseArm(); //raise arm
+        ArmMethods.lowerArm(); //lower arm
+        ArmMethods.lowerLift(); //lower lift
+
+        DriveMethods.drive(1); //drive to crater
+        Thread.sleep(500);
+
+        DriveMethods.drive(0);
     }
 }

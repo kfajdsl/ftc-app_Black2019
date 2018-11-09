@@ -55,8 +55,8 @@ public class Hardware {
         rightBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMidDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftBackDrive.setPower(0);
         leftMidDrive.setPower(0);
