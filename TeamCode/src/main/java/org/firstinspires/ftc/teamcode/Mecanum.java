@@ -25,52 +25,27 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Mecanum {
-
-    //Credits for the following two methods to team 3543 Titan Robotics.
-    //Slightly modified
-
-    public static void mecanumDrive_Cartesian(double x, double y, double rotation)
-    {
+    //Credit to FTC forums user mlwilliams for the following code.
+    //https://ftcforum.usfirst.org/forum/ftc-technology/android-studio/7025-need-help-with-teleop-code-for-mecanum-wheels
+    public static void mecanumDrive(double speed, double direction, double rotation) {
         Hardware.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Hardware.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Hardware.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Hardware.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        double wheelSpeeds[] = new double[4];
+        Hardware.leftFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Hardware.rightFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Hardware.leftBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Hardware.rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        wheelSpeeds[0] = x + y + rotation;
-        wheelSpeeds[1] = -x + y - rotation;
-        wheelSpeeds[2] = -x + y + rotation;
-        wheelSpeeds[3] = x + y - rotation;
+        final double v1 = speed * Math.cos(direction) + rotation;
+        final double v2 = speed * Math.sin(direction) - rotation;
+        final double v3 = speed * Math.sin(direction) + rotation;
+        final double v4 = speed * Math.cos(direction) - rotation;
 
-        normalize(wheelSpeeds);
-
-        Hardware.leftFrontDrive.setPower(wheelSpeeds[0]);
-        Hardware.rightFrontDrive.setPower(wheelSpeeds[1]);
-        Hardware.leftBackDrive.setPower(wheelSpeeds[2]);
-        Hardware.rightBackDrive.setPower(wheelSpeeds[3]);
-    }   //mecanumDrive_Cartesian
-
-    private static void normalize(double[] wheelSpeeds)
-    {
-        double maxMagnitude = Math.abs(wheelSpeeds[0]);
-
-        for (int i = 1; i < wheelSpeeds.length; i++)
-        {
-            double magnitude = Math.abs(wheelSpeeds[i]);
-
-            if (magnitude > maxMagnitude)
-            {
-                maxMagnitude = magnitude;
-            }
-        }
-
-        if (maxMagnitude > 1.0)
-        {
-            for (int i = 0; i < wheelSpeeds.length; i++)
-            {
-                wheelSpeeds[i] /= maxMagnitude;
-            }
-        }
-    }   //normalize
+        Hardware.leftFrontDrive.setPower(v1);
+        Hardware.rightFrontDrive.setPower(v2);
+        Hardware.leftBackDrive.setPower(v3);
+        Hardware.rightBackDrive.setPower(v4);
+    }
 }
